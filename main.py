@@ -8,6 +8,7 @@ from shot import Shot
 
 
 
+
 def main():
         pygame.init()
         clock = pygame.time.Clock()
@@ -37,6 +38,11 @@ def main():
 
         asteroidfield = AsteroidField()
 
+        total_score = 0
+
+        font = pygame.font.Font(None, 74)
+      
+
 
 # Main game loop:
         while True:
@@ -45,6 +51,8 @@ def main():
                         return
                 
               screen.fill("black")
+              text = font.render((f"Total score: {total_score}"), True, "white")
+              screen.blit(text, (100, 250))
               
               for item in updatable:
                     item.update(dt)
@@ -56,6 +64,9 @@ def main():
                           if shot.collision(item) is True:
                                 shot.kill()
                                 item.split()
+                                total_score += 1
+                                print(total_score)
+
               
 
               for item in drawable:
